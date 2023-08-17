@@ -53,15 +53,9 @@ Ruby后端开发
         \item Filter: 条件过滤, e.g. `select a from t1 where a > 1`
         \item Limit: 数据偏移, e.g. `select a from t1 limit 3 offset 1`
         \item Sort: 数据排序, e.g. `select a from t1 order by a desc`
-        \item Join (Inner/Left/Right/Full): HashJoin实现, 多表数据连接 e.g. `select * from t1 left join t2 on t1.a = t2.b`
+        \item Join (Inner/Left/Right/Full): 多表数据连接 e.g. `select * from t1 left join t2 on t1.a = t2.b`
       \end{itemize}
-    \item 实现RBO优化器及基本的SPJ优化
-      \begin{itemize}
-        \item ColumnPruning: 列裁剪, e.g. ProjectIntoScan
-        \item CombineOperators: 组合算子, e.g. CombineFilter
-        \item PushDownLimit: Limit下推, e.g. PushLimitThroughJoin
-        \item PushDownPredicates: 谓词下推, e.g. PushPredicateThroughJoin
-      \end{itemize}
+    \item 实现RBO优化器及基本的SPJ优化: ColumnPruning / PushDownPredicates ..
   \end{itemize}
 \end{onehalfspacing}
 
