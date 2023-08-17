@@ -21,7 +21,7 @@
   \github{https://github.com/KKould}
 }
 
-\section{\faUsers\ 实习/项目经历}
+\section{\faUsers\ 工作/项目经历}
 \datedsubsection{\textbf{Gitee} 深圳}{2023年2月 -- 2023年7月}
 Ruby后端开发
 \begin{itemize}
@@ -33,10 +33,11 @@ Ruby后端开发
 \datedsubsection{\textbf{KipDB}}{2022年7月 -- 至今}
 \role{Rust}{个人开源项目}
 \begin{onehalfspacing}
-轻量级LSM存储引擎, https://github.com/KipData/KipDB
+轻量级LSM存储引擎: https://github.com/KipData/KipDB
 \begin{itemize}
   \item 支持嵌入式/单机存储/远程调用等多应用场景
-  \item 以Kiss作为开发理念，设计以简单而高效为主
+  \item 参考LevelDB实现Leveled Compaction
+  \item BenchMark写入吞吐量约为Sled的两倍
   \item 实现MVCC以支持ACID
 \end{itemize}
 \end{onehalfspacing}
@@ -44,17 +45,23 @@ Ruby后端开发
 \datedsubsection{\textbf{KipSQL}}{2023年6月 -- 至今}
 \role{Rust}{合作开源项目}
 \begin{onehalfspacing}
-  基于Arrow的SQL计算引擎, https://github.com/KipData/KipSQL
+  基于Arrow的SQL计算引擎: https://github.com/KipData/KipSQL
   \begin{itemize}
     \item 支持Select/Insert/CreateTable
       \begin{itemize}
-        \item Projection
-        \item Filter
-        \item Limit
-        \item Sort
-        \item Join (Inner/Left/Right/Full)
+        \item Projection: 字段映射, e.g. `select a from t1`
+        \item Filter: 条件过滤, e.g. `select a from t1 where a > 1`
+        \item Limit: 数据偏移, e.g. `select a from t1 limit 3 offset 1`
+        \item Sort: 数据排序, e.g. `select a from t1 order by a desc`
+        \item Join (Inner/Left/Right/Full): HashJoin实现, 多表数据连接 e.g. `select * from t1 left join t2 on t1.a = t2.b`
       \end{itemize}
-    \item 实现RBO: ColumnPruning/CombineOperators/PushDownLimit/PushDownPredicates
+    \item 实现RBO优化器及基本的SPJ优化
+      \begin{itemize}
+        \item ColumnPruning: 列裁剪, e.g. ProjectIntoScan
+        \item CombineOperators: 组合算子, e.g. CombineFilter
+        \item PushDownLimit: Limit下推, e.g. PushLimitThroughJoin
+        \item PushDownPredicates: 谓词下推, e.g. PushPredicateThroughJoin
+      \end{itemize}
   \end{itemize}
 \end{onehalfspacing}
 
@@ -80,6 +87,8 @@ Ruby后端开发
 \section{\faInfo\ 其他}
 % increase linespacing [parsep=0.5ex]
 \begin{itemize}[parsep=0.5ex]
+  \item 狂热开源爱好者, 维护有多个开源项目同时为RuskDesk、skip-list等热门仓库做出贡献
+  \item 数据库爱好者，受TIDB启发从而开始学习Rust、LSM、SQL、Raft等
   \item 语言: 日语 - N3
 \end{itemize}
 
