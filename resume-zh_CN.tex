@@ -22,14 +22,6 @@
 }
 
 \section{\faUsers\ 工作/项目经历}
-\datedsubsection{\textbf{Gitee} 深圳}{2023年2月 -- 2023年7月}
-Ruby后端开发
-\begin{itemize}
-  \item CommitMessage支持MarkDown
-  \item 重构WebHook
-  \item 专业版Logo可配置化
-\end{itemize}
-
 \datedsubsection{\textbf{KipDB}}{2022年7月 -- 至今}
 \role{Rust}{个人开源项目}
 \begin{onehalfspacing}
@@ -47,18 +39,21 @@ Ruby后端开发
 \begin{onehalfspacing}
   基于KipDB持久化的轻量级SQL计算引擎: https://github.com/KipData/KipSQL
   \begin{itemize}
+    \item 支持DML/DQL/DDL等基本CRUD
     \item 支持TPC-H Q1相关语法以及Join
     \item 参考TiDB的TableCodec设计，以KV数据库作为数据存储
     \item 目前支持：KipDB, Memory两种持久化方式. 可轻易拓展满足 get/set/remove/iter 基础api的KV数据库
-    \item 实现RBO优化器及基本的SPJ优化
-      \begin{itemize}
-        \item ColumnPruning: 列裁剪, e.g. ProjectIntoScan
-        \item CombineOperators: 组合算子, e.g. CombineFilter
-        \item PushDownLimit: Limit下推, e.g. PushLimitThroughJoin
-        \item PushDownPredicates: 谓词下推, e.g. PushPredicateThroughJoin
-      \end{itemize}
+    \item 实现RBO优化器及基本的SPJ优化: ColumnPruning / PushDownPredicates ..
   \end{itemize}
 \end{onehalfspacing}
+
+\datedsubsection{\textbf{Gitee} 深圳}{2023年2月 -- 2023年7月}
+Ruby后端开发
+\begin{itemize}
+  \item CommitMessage支持MarkDown
+  \item 重构WebHook
+  \item 专业版Logo可配置化
+\end{itemize}
 
 % Reference Test
 %\datedsubsection{\textbf{Paper Title\cite{zaharia2012resilient}}}{May. 2015}
