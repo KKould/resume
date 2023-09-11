@@ -45,16 +45,11 @@ Ruby后端开发
 \datedsubsection{\textbf{KipSQL}}{2023年6月 -- 至今}
 \role{Rust}{合作开源项目}
 \begin{onehalfspacing}
-  基于Arrow的SQL计算引擎: https://github.com/KipData/KipSQL
+  基于KipDB持久化的轻量级SQL计算引擎: https://github.com/KipData/KipSQL
   \begin{itemize}
-    \item 支持Select/Insert/CreateTable
-      \begin{itemize}
-        \item Projection: 字段映射, e.g. `select a from t1`
-        \item Filter: 条件过滤, e.g. `select a from t1 where a > 1`
-        \item Limit: 数据偏移, e.g. `select a from t1 limit 3 offset 1`
-        \item Sort: 数据排序, e.g. `select a from t1 order by a desc`
-        \item Join (Inner/Left/Right/Full): HashJoin实现, 多表数据连接 e.g. `select * from t1 left join t2 on t1.a = t2.b`
-      \end{itemize}
+    \item 支持TPC-H Q1相关语法以及Join
+    \item 参考TiDB的TableCodec设计，以KV数据库作为数据存储
+    \item 目前支持：KipDB, Memory两种持久化方式. 可轻易拓展满足 get/set/remove/iter 基础api的KV数据库
     \item 实现RBO优化器及基本的SPJ优化
       \begin{itemize}
         \item ColumnPruning: 列裁剪, e.g. ProjectIntoScan
