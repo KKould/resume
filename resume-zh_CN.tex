@@ -21,38 +21,75 @@
   \github{https://github.com/KKould}
 }
 
-\section{\faUsers\ 工作/项目经历}
-\datedsubsection{\textbf{KipDB}}{2022年7月 -- 至今}
-\role{Rust}{个人开源项目}
-\begin{onehalfspacing}
-轻量级LSM存储引擎: https://github.com/KipData/KipDB
+\section{\faUsers\ 工作经历}
+\datedsubsection{\textbf{InfiniFlow}}{2023.10-2024.2}
 \begin{itemize}
-  \item 支持嵌入式/单机存储/远程调用等多应用场景
-  \item 参考LevelDB实现Leveled Compaction
-  \item BenchMark写入吞吐量约为Sled的两倍
-  \item 实现MVCC以支持ACID
+  \item 数据库内核工程师
+  \item 负责算子实现、优化器以及日常Bug维护
+\end{itemize}
+
+\datedsubsection{\textbf{开源中国 Gitee}}{2022.12-2023.7}
+\begin{itemize}
+  \item 后端开发工程师
+  \item 维护Gitee企业版功能迭代以及问题修复
+\end{itemize}
+
+\datedsubsection{\textbf{绿狐科技}}{2022.2-2022.11}
+\begin{itemize}
+  \item 后端开发工程师
+  \item 负责绿狐企业内部培训系统内的功能开发
 \end{itemize}
 \end{onehalfspacing}
 
-\datedsubsection{\textbf{KipSQL}}{2023年6月 -- 至今}
-\role{Rust}{合作开源项目}
+\section{\faUsers\ 项目经历}
+\datedsubsection{\textbf{Infinity}}{2023.10-2024.4}
+\role{CPP}{全职开发}
 \begin{onehalfspacing}
-  基于KipDB持久化的轻量级SQL计算引擎: https://github.com/KipData/KipSQL
+  The AI-native database built for LLM applications, providing incredibly fast full-text and vector search  repo: https://github.com/infiniflow/infinity
+\begin{itemize}
+  \item LateMaterialization: 延迟加载所需的列数据，计划存在多数据源算子时导致重复加载列数据而造成多余的物化开销，降低单次计划执行的内存占用
+  \item MergeLimit Executor: 将Limit build为多个子Fragment，使其能够在分布式环境下，让多个节点并行进行Limit计算
+  \item Sort Executor: 在算子每次在被调度器执行Sort计算时将此次计算输入数据进行排序，并物化，在最后一次计算时进行归并排序
+  \item WAL加载优化: 使用多层迭代器延迟对WAL以Block为单位进行读取并反序列化而避免存储大数据量时，服务重启导致恢复运行状态需要占用大量内存资源
+  \item Query Profiler: 基于DuckDB的Profiler基础上对执行进行更细粒度的记录: 计划执行时间、Binder到Executor的各个阶段计算时间、算子之间计算时间、算子每次被计算的时间，并实现非持久化的Profile记录查询，提供Show Profile使用户可以查看对应计划的具体执行信息
+\end{itemize}
+\end{onehalfspacing}
+
+\datedsubsection{\textbf{FnckSQL}}{2023.6-至今}
+\role{Rust}{作者}
+\begin{onehalfspacing}
+  SQL as a Function for Rust  repo: https://github.com/KipData/FnckSQL
   \begin{itemize}
-    \item 支持DML/DQL/DDL等基本CRUD
-    \item 支持TPC-H Q1相关语法以及Join
-    \item 参考TiDB的TableCodec设计，以KV数据库作为数据存储
-    \item 目前支持：KipDB, Memory两种持久化方式. 可轻易拓展满足 get/set/remove/iter 基础api的KV数据库
-    \item 实现RBO优化器及基本的SPJ优化: ColumnPruning / PushDownPredicates ..
+    \item 覆盖SQL 2016绝大部分Case, 例如: In Subquery、Unique、Group By、Inner/Left/Right/Full/Cross (Outer/Semi/Anti) Join
+    \item RBO + CBO实现高效的计划查询以及索引选择，提供多种Index: PrimaryKey/Unique/Normal/Composite
+    \item 参考DuckDB结合Memcomparable实现Radix Sort, 在大数据量下提供高效的排序计算性能
+    \item 主体 Volcano 执行器 + 实验性质的基于 Luajit 的 Codegen 执行器实现，允许用户根据计算场景进行选择
+    \item 支持PGWire协议，允许使用psql等客户端进行远程连接
+    \item 支持UDF并提供function宏使用户能够针对具体场景而设计自己的计算函数在SQL中
+    \item 高写入性能，Benchmark与SQLite进行对比测试，在20万行数据量下，SQLite总时间为5分钟，而FnckSQL总时间为5秒
   \end{itemize}
 \end{onehalfspacing}
 
-\datedsubsection{\textbf{Gitee} 深圳}{2023年2月 -- 2023年7月}
-Ruby后端开发
+\datedsubsection{\textbf{KipDB}}{2022.7-至今}
+\role{Rust}{作者}
+\begin{onehalfspacing}
+  Lightweight, asynchronous based on LSM Leveled Compaction KV database  repo: https://github.com/KipData/kipdb
+  \begin{itemize}
+    \item Leveled Compaction压缩策略，参考LevelDB实现，提供更高的查询速度
+    \item MVCC事务支持，参考RocksDB结合SnapShot与WriteBatch以及乐观冲突检测实现
+    \item 支持多种Compaction: Sized/Seek/Manual, 使数据库的Compaction触发更加灵活
+    \item 以Kiss(Keep It Simple, Stupid)作为开发理念，设计以简单而高效为主
+    \item 基于ProtoBuf提供RPC服务，允许用户使用远程调用
+  \end{itemize}
+\end{onehalfspacing}
+
+\section{\faUsers\ 文章博客}
+\datedsubsection{\textbf{InfiniFlow}}{2023.10-2024.2}
 \begin{itemize}
-  \item CommitMessage支持MarkDown
-  \item 重构WebHook
-  \item 专业版Logo可配置化
+  \item SQL Sort 算子实现解析以及 DuckDB Sort 模仿实现: https://zhuanlan.zhihu.com/p/673945166
+  \item SQL Filter 的表达式代换与常量关系提取: https://zhuanlan.zhihu.com/p/676332648
+  \item SQL Codegen 全阶段代码生成执行器实现: https://zhuanlan.zhihu.com/p/677154366
+  \item Cost-Based Optimization 之行数预估: https://zhuanlan.zhihu.com/p/680465610
 \end{itemize}
 
 % Reference Test
@@ -62,12 +99,12 @@ Ruby后端开发
 %  \item main contribution
 %\end{itemize}
 
-\section{\faCogs\ IT 技能}
+\section{\faCogs\ 开源贡献}
 % increase linespacing [parsep=0.5ex]
 \begin{itemize}[parsep=0.5ex]
-  \item 编程语言: Rust => Java > Go
-  \item 平台: Window, Linux
-  \item 开发: Docker
+  \item GreptimeDB: 'Create Table .. Like': https://github.com/GreptimeTeam/greptimedb/pull/3372
+  \item GreptimeDB: 'is\_null' function: https://github.com/GreptimeTeam/greptimedb/pull/3360
+  \item skip-list: add 'low\_bound'/'upper\_bound' api: https://github.com/JP-Ellis/rust-skiplist/pull/19
 \end{itemize}
 
 \section{\faGraduationCap\  教育背景}
@@ -77,8 +114,8 @@ Ruby后端开发
 \section{\faInfo\ 其他}
 % increase linespacing [parsep=0.5ex]
 \begin{itemize}[parsep=0.5ex]
-  \item 狂热开源爱好者, 维护有多个开源项目同时为RuskDesk、skip-list等热门仓库做出贡献
-  \item 数据库爱好者，受TIDB启发从而开始学习Rust、LSM、SQL、Raft等
+  \item 开源爱好者, 维护有多个开源项目同时为GrepTimeDB、skip-list等热门仓库做出贡献
+  \item 数据库爱好者
   \item 语言: 日语 - N3
 \end{itemize}
 
