@@ -22,30 +22,60 @@
 }
 
 \section{\faUsers\ 工作经历}
+\datedsubsection{\textbf{tonbo-io}}{2024.5-至今}
+\begin{itemize}
+  \item Rust开发工程师
+  \item Tonbo、Fusio 的主要开发人员
+\end{itemize}
+
 \datedsubsection{\textbf{InfiniFlow}}{2023.10-2024.2}
 \begin{itemize}
-  \item 数据库内核工程师
+  \item CPP数据库内核工程师
   \item 负责算子实现、优化器以及日常Bug维护
 \end{itemize}
 
 \datedsubsection{\textbf{开源中国 Gitee}}{2022.12-2023.7}
 \begin{itemize}
-  \item 后端开发工程师
+  \item Ruby后端开发工程师
   \item 维护Gitee企业版功能迭代以及问题修复
 \end{itemize}
 
 \datedsubsection{\textbf{绿狐科技}}{2022.2-2022.11}
 \begin{itemize}
-  \item 后端开发工程师
+  \item Java后端开发工程师
   \item 负责绿狐企业内部培训系统内的功能开发
 \end{itemize}
 \end{onehalfspacing}
 
 \section{\faUsers\ 项目经历}
+\datedsubsection{\textbf{Tonbo}}{2024.5-至今}
+\role{Rust}{全职开发}
+\begin{onehalfspacing}
+  A portable embedded database using Arrow
+\begin{itemize}
+  \item Parquet Schema 原生兼容: 在 Rust 定义结构体通过 Record derive 宏生成对应的 Schema 代码，使
+  Tonbo 直接以 Parquet 作为 SSTable
+  \item 多存储介质兼容 (S3/Tokio/MonoIo/TokioUring): 实现支持多运行时的 io 封装框架：fusio 同时
+  支持 Local/Remote 存储方式，使 Tonbo 支持设置不同 Level 层级设置不同的存储介质
+\end{itemize}
+\end{onehalfspacing}
+
+\datedsubsection{\textbf{GreptimeDB}}{2024.3-至今}
+\role{Rust}{Commiter}
+\begin{onehalfspacing}
+  An open-source, cloud-native, unified time series database for metrics, logs and events with SQL/PromQL
+supported. Available on GreptimeCloud.
+\begin{itemize}
+  \item 支持修改列类型: 对 CompatReader 组件进行类型转换拓展，使旧 SSTable 能够将对应列进行安全
+的类型转换，并拓展相关的 Parse 语法以及 Meta 管理
+  \item 支持 Create Table ... Like: 解决现有用户所需，参考 DuckDB 中从现有 Table 中复制结构为新 Table 的语法
+\end{itemize}
+\end{onehalfspacing}
+
 \datedsubsection{\textbf{Infinity}}{2023.10-2024.4}
 \role{CPP}{全职开发}
 \begin{onehalfspacing}
-  The AI-native database built for LLM applications, providing incredibly fast full-text and vector search  repo: https://github.com/infiniflow/infinity
+  The AI-native database built for LLM applications, providing incredibly fast full-text and vector search
 \begin{itemize}
   \item LateMaterialization: 延迟加载所需的列数据，计划存在多数据源算子时导致重复加载列数据而造成多余的物化开销，降低单次计划执行的内存占用
   \item MergeLimit Executor: 将Limit build为多个子Fragment，使其能够在分布式环境下，让多个节点并行进行Limit计算
@@ -55,18 +85,17 @@
 \end{itemize}
 \end{onehalfspacing}
 
-\datedsubsection{\textbf{FnckSQL}}{2023.6-至今}
+\datedsubsection{\textbf{KiteSQL}}{2023.6-至今}
 \role{Rust}{作者}
 \begin{onehalfspacing}
-  SQL as a Function for Rust  repo: https://github.com/KipData/FnckSQL
+  SQL as a Function for Rust  repo: https://github.com/KipData/KiteSQL
   \begin{itemize}
     \item 覆盖SQL 2016绝大部分Case, 例如: In Subquery、Unique、Group By、Inner/Left/Right/Full/Cross (Outer/Semi/Anti) Join
     \item RBO + CBO实现高效的计划查询以及索引选择，提供多种Index: PrimaryKey/Unique/Normal/Composite
     \item 参考DuckDB结合Memcomparable实现Radix Sort, 在大数据量下提供高效的排序计算性能
-    \item 主体 Volcano 执行器 + 实验性质的基于 Luajit 的 Codegen 执行器实现，允许用户根据计算场景进行选择
     \item 支持PGWire协议，允许使用psql等客户端进行远程连接
     \item 支持UDF并提供function宏使用户能够针对具体场景而设计自己的计算函数在SQL中
-    \item 高写入性能，Benchmark与SQLite进行对比测试，在20万行数据量下，SQLite总时间为5分钟，而FnckSQL总时间为5秒
+    \item 内置TPCC测试，tpmC: 7815 link: https://github.com/KipData/KiteSQL?tab=readme-ov-file#tpc-c
   \end{itemize}
 \end{onehalfspacing}
 
@@ -84,12 +113,17 @@
 \end{onehalfspacing}
 
 \section{\faUsers\ 文章博客}
-\datedsubsection{\textbf{InfiniFlow}}{2023.10-2024.2}
 \begin{itemize}
   \item SQL Sort 算子实现解析以及 DuckDB Sort 模仿实现: https://zhuanlan.zhihu.com/p/673945166
   \item SQL Filter 的表达式代换与常量关系提取: https://zhuanlan.zhihu.com/p/676332648
   \item SQL Codegen 全阶段代码生成执行器实现: https://zhuanlan.zhihu.com/p/677154366
   \item Cost-Based Optimization 之行数预估: https://zhuanlan.zhihu.com/p/680465610
+\end{itemize}
+
+\section{\faUsers\ 开源访谈}
+\datedsubsection{\textbf{GreptimeDB}}{2024-11-20}
+\begin{itemize}
+  \item https://greptime.com/blogs/2024-11-20-committer-kould-interview
 \end{itemize}
 
 % Reference Test
@@ -99,14 +133,6 @@
 %  \item main contribution
 %\end{itemize}
 
-\section{\faCogs\ 开源贡献}
-% increase linespacing [parsep=0.5ex]
-\begin{itemize}[parsep=0.5ex]
-  \item GreptimeDB: 'Create Table .. Like': https://github.com/GreptimeTeam/greptimedb/pull/3372
-  \item GreptimeDB: 'is\_null' function: https://github.com/GreptimeTeam/greptimedb/pull/3360
-  \item skip-list: add 'low\_bound'/'upper\_bound' api: https://github.com/JP-Ellis/rust-skiplist/pull/19
-\end{itemize}
-
 \section{\faGraduationCap\  教育背景}
 \datedsubsection{\textbf{广东机电职业技术学院}, 广东, 广州}{2019 -- 2022}
 \textit{专科}\ 软件技术
@@ -114,8 +140,7 @@
 \section{\faInfo\ 其他}
 % increase linespacing [parsep=0.5ex]
 \begin{itemize}[parsep=0.5ex]
-  \item 开源爱好者, 维护有多个开源项目同时为GrepTimeDB、skip-list等热门仓库做出贡献
-  \item 数据库爱好者
+  \item 开源爱好者, 维护有多个开源项目同时为GrepTimeDB、StarRocks、Limbo等知名数据库做出贡献
   \item 语言: 日语 - N3
 \end{itemize}
 
